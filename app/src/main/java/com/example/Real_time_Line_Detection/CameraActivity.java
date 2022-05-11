@@ -18,6 +18,8 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 public class CameraActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2{
@@ -115,8 +117,44 @@ public class CameraActivity extends Activity implements CameraBridgeViewBase.CvC
         Mat edges = new Mat();
         //take input image 8bit and output edges in 8 bit by declare threshold 1 and 2
         Imgproc.Canny(mRgba,edges,125,255);
-        // return real time Line Detection
-        return edges;
+        // then detect lines in the frame
+
+        // frist define variable that store lines in mat format
+        Mat lines = new Mat();
+
+        // Starting and ending Point of lines
+        Point p1 = new Point();
+        Point p2 = new Point();
+        double a,b;
+        double x0,y0;
+
+        Imgproc.HoughLines(edges,lines,1.0,Math.PI/180,140);
+
+        //then loop in each line
+        for(int i =0 ; i<lines.rows();i++){
+            double [] vec = lines.get(i,0);
+            double rho = vec[0];
+            double theta = vec[1];
+
+            a=Math.cos(theta);
+            b=Math.sin(theta);
+            x0=a*rho;
+            y0=b*rho;
+
+
+            // starting Point and end Point
+            p1.x = Math.round(x0+1000*(-b));
+            p1.y = Math.round(y0+1000*(a));
+            p2.x = Math.round(x0-1000*(-b));
+            p2.y = Math.round(y0-1000*(a));
+
+            //drawLine on Orignial Frame
+
+            Imgproc.line(mRgba,p1,p2,new Scalar(255,0,0),1,Imgproc.LINE_AA,0);
+
+        }
+
+        return mRgba;
     }
 
 }
