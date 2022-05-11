@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ImagePro</string>
-    <string name="objectButton">Object</string>
+    <string name="app_name">Real Time Line Detection</string>
+    <string name="objectButton">Line Detection</string>
 </resources>

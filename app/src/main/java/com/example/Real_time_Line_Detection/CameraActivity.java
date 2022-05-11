@@ -1,6 +1,5 @@
-package com.example.imagepro;
+package com.example.Real_time_Line_Detection;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -104,17 +103,20 @@ public class CameraActivity extends Activity implements CameraBridgeViewBase.CvC
 
     public void onCameraViewStarted(int width ,int height){
         mRgba=new Mat(height,width, CvType.CV_8UC4);
-        mGray =new Mat(height,width,CvType.CV_8UC1);
     }
     public void onCameraViewStopped(){
         mRgba.release();
     }
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame){
         mRgba=inputFrame.rgba();
-        mGray=inputFrame.gray();
+        //Convert RGBa To BGA, Gray Scale or any type
+        /*Imgproc.cvtColor(mRgba,mRgba,Imgproc.COLOR_RGBA2GRAY);*/
 
-        return mRgba;
-
+        Mat edges = new Mat();
+        //take input image 8bit and output edges in 8 bit by declare threshold 1 and 2
+        Imgproc.Canny(mRgba,edges,125,255);
+        // return real time Line Detection
+        return edges;
     }
 
 }

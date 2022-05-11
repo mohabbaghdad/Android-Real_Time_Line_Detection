@@ -416,8 +416,8 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
             if(canvas.getHeight()>canvas.getWidth()){
                 canvas.rotate(90f,canvas.getWidth()/2,canvas.getHeight()/2);
                 // for my Phone my scale values are
-                mScale1=1.8f;
-                mScale2=1.5f;
+                mScale1=2.3f;
+                mScale2=1.8f;
 
             }
             else{
@@ -451,6 +451,7 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
                 if (mFpsMeter != null) {
                     mFpsMeter.measure();
                     mFpsMeter.draw(canvas, 20, 30);
+                    Log.d("Scuess",mFpsMeter.toString());
                 }
                 getHolder().unlockCanvasAndPost(canvas);
             }

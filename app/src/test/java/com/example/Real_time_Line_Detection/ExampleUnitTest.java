@@ -1,4 +1,4 @@
-package com.example.imagepro;
+package com.example.Real_time_Line_Detection;
 
 import org.junit.Test;
 

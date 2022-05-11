@@ -1,4 +1,4 @@
-package com.example.imagepro;
+package com.example.Real_time_Line_Detection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 
 import org.opencv.android.OpenCVLoader;
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void onClickCamera(View v) {
-        Intent i = new Intent(MainActivity.this,CameraActivity.class);
+        Intent i = new Intent(MainActivity.this, com.example.Real_time_Line_Detection.CameraActivity.class);
         startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }
